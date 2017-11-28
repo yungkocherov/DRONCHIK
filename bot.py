@@ -25,7 +25,7 @@ def knopki(message):
     msg = bot.send_voice(message.chat.id, f, None)
 
 
-@bot.message_handler(regexp="Вариант для Ули2")
+@bot.message_handler(regexp="smh")
 def knopki(message):
     md = bot.send_message(message.chat.id, 'Это тебе <3', None)
     f = open('music/kartinki24_flowers_0017.jpg', 'rb')

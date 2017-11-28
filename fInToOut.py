@@ -2,12 +2,13 @@ def InToOut(s):
     q = []
     x = 0
     out = []
-
     while x < len(s):
         t = None
+
         if s[x] == '(':
             q.append(s[x])
             x += 1
+
         elif s[x] == ')':
             while q[len(q) - 1] != '(':
                 out.append(str(q.pop()))
@@ -24,9 +25,8 @@ def InToOut(s):
             x += 1
         elif s[x] == '-' or s[x] == '+':
             if len(q) > 0:
-                while (q[len(q) - 1] == '*' or q[len(q) - 1] == '/' or q[len(q) - 1] == '-' or q[len(q) - 1] == '+' or
-                               q[
-                                       len(q) - 1] == '^'):
+                while q[len(q) - 1] == '*' or q[len(q) - 1] == '/' or q[len(q) - 1] == '-' or q[len(q) - 1] == '+' or q[
+                            len(q) - 1] == '^':
                     out.append(str(q[len(q) - 1]))
                     q.pop()
                     if len(q) == 0:
@@ -47,10 +47,13 @@ def InToOut(s):
             if t is not None:
                 out.append(t)
 
+
+
         else:
             if x < len(s):
                 out.append(s[x])
                 x += 1
     while len(q) > 0:
         out.append(str(q.pop()))
-    return out
+    return (out)
+

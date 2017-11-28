@@ -46,7 +46,7 @@ xmax = 15
 dx = 1
 xlist = mlab.frange(xmin, xmax, dx)
 for i in xlist:
-    v = d
+    v = list(d)
     for g in range (len(v)):
         if v[g] == 'x':
             v[g] = i

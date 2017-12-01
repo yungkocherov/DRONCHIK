@@ -37,6 +37,7 @@ def calculate(d):
 
 from pylab import *
 
+
 xmin = -100
 xmax = 100
 dx = 1

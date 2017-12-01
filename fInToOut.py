@@ -1,7 +1,33 @@
-def InToOut(s):
+def inToOut(s):
     q = []
     x = 0
     out = []
+    '''
+    s = s + ' '
+
+    while x < (len(s)):
+        t = None
+        if s[x] == '-':
+            for i in range(x + 1, len(s)):
+                if '0' <= s[i] <= '9' or s[i] == '(':
+                    if s[i] == '(':
+                        for g in range(i+1, len(s)):
+                            if s[g]==')':
+                                k = g
+                                break
+                    
+                    pass
+                else:
+                    k = i
+                    break
+
+            s = s[:x] + '+(0-' + s[x + 1:k] + ')' + s[k:]
+            x+=4
+
+        x+=1
+    s = s[:len(s)-1]
+    x = 0
+    '''
     while x < len(s):
         t = None
 
@@ -55,5 +81,5 @@ def InToOut(s):
                 x += 1
     while len(q) > 0:
         out.append(str(q.pop()))
-    return (out)
+    return out
 

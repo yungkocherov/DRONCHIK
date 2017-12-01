@@ -1,7 +1,8 @@
-from fInToOut import *
 import pylab
-from matplotlib import mlab
-
+from math import *
+import copy
+from tkinter import *
+from fInToOut import *
 OPERATORS = {
     '+': float.__add__,
     '-': float.__sub__,
@@ -12,15 +13,15 @@ OPERATORS = {
 }
 
 
-
 def calculate(d):
+    v = list(inToOut(d))
     stack = []
     i = 0
     k = 0
     end = False
     while not end:
         k = 0
-        c = d[i]
+        c = v[i]
         if c in ['+', '-', '/', '*', '^', '%']:
             a = stack.pop()
             b = stack.pop()
@@ -29,33 +30,42 @@ def calculate(d):
             k = float(c)
         stack.append(k)
         i = i + 1
-        if i >= len(d):
+        if i >= len(v):
             end = True
-    return (k)
+    return k
 
 
+from pylab import *
 
-
-
-s = input()
-d = InToOut(s)
-z = []
-v = d
-xmin = 1
-xmax = 15
+xmin = -100
+xmax = 100
 dx = 1
 xlist = mlab.frange(xmin, xmax, dx)
-for i in xlist:
-    v = d
-    for g in range (len(v)):
-        if v[g] == 'x':
-            v[g] = i
+xlist = list(xlist)
 
-    print(v)
-    '''l = calculate(d)'''
-    '''z.append(l)'''
-print(z)
-'''
-pylab.plot(xlist, z)
-pylab.show()
-'''
+
+def func(d):
+    root = Tk()
+    d = str(d)
+    h = d
+
+    z = []
+    for i in xlist:
+
+            for g in range(len(d)):
+                if d[g] == 'x':
+                    if i<0 :
+                        d = d[:g] +'(0'+str(i) + ')' + d[g+1:]
+                    else:
+                        d = d[:g] + str(i) + d[g + 1:]
+            try:
+                l = calculate(d)
+            except:
+                pass
+            z.append(l)
+            print(l,'    ', i)
+            d = h
+
+    pylab.plot(xlist, z)
+    savefig('plot')
+    plt.clf()

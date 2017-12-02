@@ -1,8 +1,6 @@
 import pylab
-from math import *
-import copy
-from tkinter import *
 from fInToOut import *
+
 OPERATORS = {
     '+': float.__add__,
     '-': float.__sub__,
@@ -37,36 +35,40 @@ def calculate(d):
 
 from pylab import *
 
-
-xmin = -100
-xmax = 100
-dx = 1
+xmin = -2
+xmax = 2
+dx = 0.01
 xlist = mlab.frange(xmin, xmax, dx)
 xlist = list(xlist)
 
 
 def func(d):
-    root = Tk()
+    d = d.replace(' ', '')
     d = str(d)
     h = d
 
     z = []
     for i in xlist:
+        g = 0
+        while g < len(d):
+            if d[g] == 'x':
+                if i < 0:
+                    d = d[:g] + '(0' + str(i) + ')' + d[g + 1:]
+                else:
+                    d = d[:g] + str(i) + d[g + 1:]
+            g+=1
 
-            for g in range(len(d)):
-                if d[g] == 'x':
-                    if i<0 :
-                        d = d[:g] +'(0'+str(i) + ')' + d[g+1:]
-                    else:
-                        d = d[:g] + str(i) + d[g + 1:]
-            try:
-                l = calculate(d)
-            except:
-                pass
+        try:
+            l = calculate(d)
+        except:
+            pass
+        if -100<=l<=100:
             z.append(l)
-            print(l,'    ', i)
-            d = h
-
+        elif l<-100:
+            z.append(-100)
+        elif l>100:
+            z.append(100)
+        d = h
     pylab.plot(xlist, z)
     savefig('plot')
     plt.clf()

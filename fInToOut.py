@@ -2,34 +2,11 @@ def inToOut(s):
     q = []
     x = 0
     out = []
-    '''
-    s = s + ' '
 
-    while x < (len(s)):
-        t = None
-        if s[x] == '-':
-            for i in range(x + 1, len(s)):
-                if '0' <= s[i] <= '9' or s[i] == '(':
-                    if s[i] == '(':
-                        for g in range(i+1, len(s)):
-                            if s[g]==')':
-                                k = g
-                                break
-                    
-                    pass
-                else:
-                    k = i
-                    break
-
-            s = s[:x] + '+(0-' + s[x + 1:k] + ')' + s[k:]
-            x+=4
-
-        x+=1
-    s = s[:len(s)-1]
-    x = 0
-    '''
     while x < len(s):
         t = None
+        m = None
+        k = 0
 
         if s[x] == '(':
             q.append(s[x])
@@ -62,15 +39,36 @@ def inToOut(s):
         elif s[x] == '^':
             q.append('^')
             x += 1
-        elif x < len(s) and '0' <= s[x] <= '9':
+        elif x < len(s) and ('0' <= s[x] <= '9' or s[x] == '.'):
+
             while x < len(s) and '0' <= s[x] <= '9':
                 if t:
-                    t = t * 10 + int(s[x])
+                    t = t * 10 + float(int(s[x]))
                 else:
-                    t = int(s[x])
+                    t = float(int(s[x]))
                 x += 1
+            try:
+                if s[x] == '.' :
 
-            if t is not None:
+                    x+=1
+                    try:
+                         while '0' <= s[x] <= '9':
+                            k+=1
+                            if m != None:
+                                m = m  + (int(s[x])/(10**k))
+
+                            else:
+                                m = float(int (s[x])/(10))
+                            x += 1
+                    except:
+                        pass
+            except:
+                pass
+
+
+            if t is not None and m is not None:
+                out.append(t+m)
+            elif m is None:
                 out.append(t)
 
 
@@ -82,4 +80,3 @@ def inToOut(s):
     while len(q) > 0:
         out.append(str(q.pop()))
     return out
-

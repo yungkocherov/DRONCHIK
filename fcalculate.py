@@ -1,5 +1,6 @@
 import pylab
 from fInToOut import *
+import math
 
 OPERATORS = {
     '+': float.__add__,
@@ -35,40 +36,43 @@ def calculate(d):
 
 from pylab import *
 
-xmin = -2
-xmax = 2
+xmin = -10
+xmax = 10
 dx = 0.01
 xlist = mlab.frange(xmin, xmax, dx)
 xlist = list(xlist)
 
 
 def func(d):
+    global xlist
     d = d.replace(' ', '')
     d = str(d)
     h = d
-
+    x1 = []
     z = []
     for i in xlist:
         g = 0
+
         while g < len(d):
             if d[g] == 'x':
                 if i < 0:
                     d = d[:g] + '(0' + str(i) + ')' + d[g + 1:]
                 else:
                     d = d[:g] + str(i) + d[g + 1:]
-            g+=1
+            g += 1
 
         try:
             l = calculate(d)
         except:
             pass
-        if -100<=l<=100:
+        if (-10 <= l <= 10):
             z.append(l)
-        elif l<-100:
-            z.append(-100)
-        elif l>100:
-            z.append(100)
+            x1.append(i)
+        else:
+            xlist.remove(i)
+
         d = h
-    pylab.plot(xlist, z)
+    print(len(xlist), '\n', len(z))
+    pylab.plot(x1, z)
     savefig('plot')
     plt.clf()

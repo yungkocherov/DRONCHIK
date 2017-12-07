@@ -15,7 +15,7 @@ def buttons(message):
     markup = types.ReplyKeyboardMarkup()
     markup.row('Примеры')
     markup.row('Построй график')
-    markup.row('smh')
+    markup.row('Расскажи анекдот')
     bot.send_message(message.chat.id, 'Выбирай:', reply_markup=markup)
 
 
@@ -33,12 +33,11 @@ def roflanPomoyka(message):
         msg = bot.send_photo(message.chat.id, plot, None)
         message.text = 0
 '''
-@bot.message_handler(content_types=["text"])
-def art(message):
-    func(message.text)
-    plot = open('plot.png', 'rb')
-    msg = bot.send_photo(message.chat.id, plot, None)
-    message.text = 0
-''' 
+@bot.message_handler(regexp="Расскажи анекдот")
+def anekdot(message):
+    j = str(random.randint(10))+'.jpg'
+    an = open (j,'rb')
+    msg = bot.send_photo(message.chat.id, j, None)
+'''
 if __name__ == '__main__':
     bot.polling(none_stop=True)

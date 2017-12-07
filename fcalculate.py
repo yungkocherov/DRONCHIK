@@ -63,13 +63,13 @@ def func(d):
 
         try:
             l = calculate(d)
-        except:
-            pass
-        if (-10 <= l <= 10):
+            if (-10 <= l <= 10):
             z.append(l)
             x1.append(i)
-        else:
-            xlist.remove(i)
+        except:
+            pass
+
+
 
         d = h
     print(len(xlist), '\n', len(z))

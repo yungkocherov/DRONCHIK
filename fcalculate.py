@@ -64,8 +64,8 @@ def func(d):
         try:
             l = calculate(d)
             if (-10 <= l <= 10):
-            z.append(l)
-            x1.append(i)
+                z.append(l)
+                x1.append(i)
         except:
             pass
 
